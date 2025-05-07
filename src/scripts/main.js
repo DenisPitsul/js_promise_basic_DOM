@@ -3,17 +3,16 @@
 const logoElement = document.querySelector('.logo');
 
 const promise1 = new Promise((resolve, reject) => {
-  resolve();
-});
-
-logoElement.addEventListener('click', () => {
-  promise1.then(successHandler).catch(errorHandler);
+  logoElement.addEventListener('click', () => {
+    resolve();
+  });
 });
 
 const promise2 = new Promise((resolve, reject) => {
-  setTimeout(reject, 3000);
+  setTimeout(() => reject(new Error('Timeout')), 3000);
 });
 
+promise1.then(successHandler).catch(errorHandler);
 promise2.then(successHandler).catch(errorHandler);
 
 function successHandler() {
